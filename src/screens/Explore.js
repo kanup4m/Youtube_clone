@@ -1,55 +1,53 @@
-import React from 'react';
-import { StyleSheet, Text, View, FlatList, ScrollView } from 'react-native';
-import Header from '../components/Header'
-import Card from '../components/Card'
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, FlatList, ActivityIndicator } from 'react-native';
 import Constant from 'expo-constants'
+import Header from '../components/Header'
+import Cards from '../components/Card'
 
-import { useSelector } from 'react-redux'
 
-const LittleCard = ({ name }) => {
+const Trending = () => {
+    const url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=30&order=viewCount&relevanceLanguage=en&type=video&key=AIzaSyBcefRiQK1sOgmaa97t_WTHrSmEuv24mGM'
+    const [stat, setStat] = useState([])
+    const [loading, setLoading] = useState(true)
 
+    useEffect(() => {
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                setLoading(false)
+                setStat(data.items)
+            });
+    }, [])
     return (
-        <View style={{
-            backgroundColor: "red",
-            height: 50,
-            width: 180,
-            borderRadius: 4,
-            marginTop: 10
-        }}>
-            <Text style={{
-                textAlign: "center",
-                color: "white",
-                fontSize: 22,
-                marginTop: 5
-            }}>{name}</Text>
-        </View>
-    )
-}
-
-const Explore = () => {
-    const cardData = useSelector(state => {
-        return state.cardData
-    })
-    return (
-        <View style={{ flex: 1 }}>
+        <View style={styles.container}>
             <Header />
-            <FlatList
-                data={cardData}
+
+            {loading ? <ActivityIndicator size="large" color="red" style={{ marginTop: 10 }} /> : <FlatList
+                data={stat}
                 keyExtractor={item => item.id.videoId}
                 renderItem={({ item }) => {
-                    return <Card
+                    return <Cards
                         videoId={item.id.videoId}
                         title={item.snippet.title}
                         channel={item.snippet.channelTitle}
                         thumbnail={item.snippet.thumbnails.high.url}
                     />
                 }}
-
-
-            />
+            />}
 
         </View>
-    )
+    );
 }
 
-export default Explore
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        marginTop: Constant.statusBarHeight
+
+    },
+
+
+
+})
+
+export default Trending;

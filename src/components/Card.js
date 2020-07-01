@@ -17,8 +17,10 @@ const Card = (props) => {
                 <View style={styles.flex1}>
                     <MaterialCommunityIcons name="account-circle" size={40} color="#212121" />
                     <View style={{ marginLeft: 5 }}>
-                        <Text ellipsizeMode="tail" numberOfLines={2} style={{ width: Dimensions.get("screen").width - 20, fontSize: 20, color: textcolor }}>{props.title}</Text>
-                        <Text style={{ color: textcolor }}>{props.channel}</Text>
+                        <Text ellipsizeMode="tail" numberOfLines={2} style={{ width: Dimensions.get("screen").width / 1.2, fontSize: 20, color: textcolor }}>{props.title}</Text>
+                        <View style={{ flexDirection: 'row', justifyContent: "space-between", width: Dimensions.get("screen").width - 50 }}>
+                            <Text style={{ color: textcolor }}>{props.channel}</Text>
+                        </View>
                     </View>
                 </View>
             </View>

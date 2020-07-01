@@ -10,6 +10,7 @@ import VideoPlayer from './src/screens/VideoPlayer';
 import Explore from './src/screens/Explore';
 import Subscribe from './src/screens/Subscribe';
 import { reducer } from './src/reducers/reducer'
+import { viewReducer } from './src/reducers/viewReducer'
 import { themeReducer } from './src/reducers/themeReducer'
 import { Provider, useSelector } from 'react-redux'
 import { createStore, combineReducers } from 'redux'
@@ -40,7 +41,8 @@ const customDefaultTheme = {
 
 const rooReducer = combineReducers({
   cardData: reducer, //[],
-  myDarkMode: themeReducer//false
+  myDarkMode: themeReducer,//false
+  viewReducer: viewReducer
 })
 const store = createStore(rooReducer)
 
@@ -58,8 +60,8 @@ const RootHome = () => {
 
           if (route.name === 'Home') {
             iconName = 'home';
-          } else if (route.name === 'Explore') {
-            iconName = 'explore';
+          } else if (route.name === 'Trending') {
+            iconName = 'trending-up';
           } else if (route.name === 'Subscribe') {
             iconName = 'subscriptions';
           }
@@ -74,7 +76,7 @@ const RootHome = () => {
       }}
     >
       <Tabs.Screen name="Home" component={Home} />
-      <Tabs.Screen name="Explore" component={Explore} />
+      <Tabs.Screen name="Trending" component={Explore} />
       <Tabs.Screen name="Subscribe" component={Subscribe} />
     </Tabs.Navigator>
   );

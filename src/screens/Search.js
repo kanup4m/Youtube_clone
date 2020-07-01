@@ -11,22 +11,28 @@ const Search = ({ navigation }) => {
     const { colors } = useTheme()
     const mycolor = colors.iconColor
 
-    const [value, setValue] = useState('React')
+    const [value, setValue] = useState('')
+    const [stat, setStat] = useState([])
+    const abc = []
     const dispatch = useDispatch()
     const data = useSelector(state => {
         return state.cardData
     })
     const [loading, setLoading] = useState(false)
-    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=30&q=${value}&regionCode=IN&type=video&key=AIzaSyBVs1lWDlyvsii7_5Hy2yPgUyIcfoSfT_Q`
+    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=30&q=${value}&regionCode=IN&type=video&key=AIzaSyBcefRiQK1sOgmaa97t_WTHrSmEuv24mGM`
     const fetchData = () => {
         setLoading(true)
         fetch(url)
             .then(response => response.json())
             .then(data => {
                 setLoading(false)
+                setStat(data.items)
                 dispatch({ type: "add", payload: data.items })
             });
     }
+
+
+
     return (
         <View style={styles.container}>
             <View style={{ padding: 5, flexDirection: "row", justifyContent: "space-around", elevation: 5, backgroundColor: colors.headerColor }}>
