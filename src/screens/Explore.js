@@ -6,7 +6,7 @@ import Cards from '../components/Card'
 
 
 const Trending = () => {
-    const url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=30&order=viewCount&relevanceLanguage=en&type=video&key=AIzaSyBcefRiQK1sOgmaa97t_WTHrSmEuv24mGM'
+    const url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=30&order=viewCount&relevanceLanguage=en&type=video&key=[Add your key]'
     const [stat, setStat] = useState([])
     const [loading, setLoading] = useState(true)
 
