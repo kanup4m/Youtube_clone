@@ -19,7 +19,7 @@ const Search = ({ navigation }) => {
         return state.cardData
     })
     const [loading, setLoading] = useState(false)
-    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=30&q=${value}&regionCode=IN&type=video&key=AIzaSyBcefRiQK1sOgmaa97t_WTHrSmEuv24mGM`
+    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=30&q=${value}&regionCode=IN&type=video&key=[Add your key]`
     const fetchData = () => {
         setLoading(true)
         fetch(url)
